@@ -9,6 +9,9 @@
 -- is rejected there (error 42501, "extension pg_search is deprecated and no longer
 -- allowed"). Checking availability alone is therefore not enough: a failed CREATE must
 -- also be caught and skipped, otherwise the whole db:migrate aborts on Neon.
+-- On Neon, also set FTS_SEARCH_PROVIDER=pg_like in the deployment environment:
+-- after migrations, scripts/migrateServerDB checks pg_search readiness and aborts
+-- if the provider is still the default pg_search and the extension is absent.
 DO $$
 BEGIN
   IF EXISTS (SELECT 1 FROM pg_available_extensions WHERE name = 'pg_search') THEN
