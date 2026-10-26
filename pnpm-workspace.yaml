@@ -16,6 +16,7 @@ publicHoistPattern:
   - '*stylelint*'
   - '@auth/core'
   - 'pdfjs-dist'
+  - 'zod-openapi'
 
 packages:
   - packages/**
